@@ -1,44 +1,51 @@
 from frota import *
+from operar_carro import *
 
 if __name__ == "__main__":
-    print('Cadastre um carro')
-    nm_modelo = input('Digite o modelo: ')
-    nm_marca = input('Digite a marca: ')
-    nm_cor = input('Digite a cor: ')
+	print('Cadastre o primeiro carro')
+	nm_modelo = input('Digite o modelo: ')
+	nm_marca = input('Digite a marca: ')
+	nm_cor = input('Digite a cor: ')
 
-    kms = float(input('Digite com quantos Kms: '))
+	#kms = float(input('Digite com quantos Kms: '))
+	kms = float(0.0)
+	qtd_tanque = float(input('Digite quantos Litros tem no tanque: '))
+	consumo_medio = float(input('Digite o consumo Médio por KM do carro: '))
+	carro1 = Carro(nm_modelo, nm_marca, nm_cor, kms, qtd_tanque, consumo_medio, motor = False)
 
-    carro1 = Carro(nm_modelo, nm_marca, nm_cor, kms, motor = True)
+	print('\nCadastre o segundo carro')
+	nm_modelo = input('Digite o modelo: ')
+	nm_marca = input('Digite a marca: ')
+	nm_cor = input('Digite a cor: ')
 
-    '''
-    Controlando o carro até ele atingir 10000 Km
-    '''
-    while carro1.odometro < 10000:
-        try:
-            print('1- Ligar motor')
-            print('2- Desligar motor')
-            print('3- Acelerar')
+	#kms = float(input('Digite com quantos Kms: '))
+	kms = float(0.0)
+	qtd_tanque = float(input('Digite quantos Litros tem no tanque: '))
+	consumo_medio = float(input('Digite o consumo Médio por KM do carro: '))
+	carro2 = Carro(nm_modelo, nm_marca, nm_cor, kms, qtd_tanque, consumo_medio, motor = False)
 
-            op = 0
-            while op not in (1,2,3):
-                op = int(input("Digite as opcoes[1-3]: "))
+	'''
+	Controlando o carro até eles atingirem 600 Km
+	'''
+	while carro1.odometro < 600 and carro2.odometro < 600:
+		try:
+			carro = int(input('Escolha um carro 1 ou 2: '))
+			if carro == 1:
+				operar_carro(carro1)
+			elif carro == 2:
+				operar_carro(carro2)
+		except Exception as e:
+		    print("Erro!")
+		    print(e)
 
-            if op == 1:
-                carro1.ligar()
-            elif op == 2:
-                carro1.desligar()
-            elif op == 3:
-                v = float(input("Informe a velocidade: "))
-                t = float(input("Informe o tempo: "))
-                carro1.acelerar(v, t)
-
-            print('Infos atuais do carro')
-            print(carro1)
-        except Exception as e:
-            print("Erro!")
-            print(e)
-
-    carro1.desligar()
-    print(carro1)
-    print('Parar para trocar óleo!!!')
+	try:
+		carro1.desligar()
+		carro2.desligar()
+	except Exception as e:
+		pass
+	
+	print('\n\n-=-=-=-=\nCarro 1: ')
+	print(carro1)
+	print('-=-=-=-=\nCarro 2: ')
+	print(carro2)
 
