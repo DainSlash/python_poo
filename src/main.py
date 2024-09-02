@@ -1,6 +1,7 @@
 from frota import *
 from operar_carro import *
 import pickle
+import pickletools
 
 if __name__ == "__main__":
 	
@@ -9,7 +10,6 @@ if __name__ == "__main__":
 	try:
 		with open("carros.pkl","rb") as arquivo:	
 			carros = pickle.load(arquivo)
-			print(carros)
 			carros = [carro for carro in carros.values()]
 			
 	except:
