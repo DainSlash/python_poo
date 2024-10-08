@@ -1,4 +1,6 @@
-class Pessoa:
+from abc import ABC, abstractmethod
+
+class Pessoa (ABC):
     __nome : str
     __RG : str
     __CPF : str
@@ -16,6 +18,10 @@ class Pessoa:
 
     def __repr__(self):
         return f"Pessoa(nome='{self.__nome}', RG='{self.__RG}', CPF='{self.__CPF}')"
+
+    @abstractmethod
+    def assinatura_eletronica(self):
+        pass
 
 class Eleitor(Pessoa):
     __titulo : int
