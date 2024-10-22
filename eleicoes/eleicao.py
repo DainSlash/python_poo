@@ -2,6 +2,7 @@ import pickle
 from typing import List
 from common import *
 from Interface_Eleicao import Transparencia
+import csv
 
 class Urna:
     mesario : Pessoa
@@ -51,6 +52,17 @@ class Urna:
         info += f'Mesario {self.mesario}\n'
         return info
 
+    def to_csv(self):
+        with open(f'transparencia_{self.__zona}.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Seção', 'Zona', 'Título dos Eleitores Presente'])
 
+            for eleitor in self.__eleitores_presentes:
+                writer.writerow([self.__secao,self.__zona, eleitor.get_titulo()])
+
+    def to_txt(self):
+        with open(f'transparencia_{self.__zona}.txt', mode='w') as file:
+            for eleitor in self.__eleitores_presentes:
+                file.write(eleitor.__str__())
 
 
